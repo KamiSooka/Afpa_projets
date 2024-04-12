@@ -7,8 +7,10 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum commodi fuga quas voluptatibus reiciendis id velit doloribus quaerat, eos odio ad nihil sapiente corporis, illo placeat ducimus non ea esse?
     </p>
     <ul>
+        {% for recipe in recipes %}
         <li>
-            <a href="{{ path('recipe.show', {id: 32, slug: 'pate-bolognaise'}) }}">Pâtes bolognaise</a>
+            <a href="{{ path('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title }}</a>
         </li>
+        {% endfor %}
     </ul> 
 {% endblock %}
