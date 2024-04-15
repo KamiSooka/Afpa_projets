@@ -1,0 +1,5 @@
+{% for type, messages in app.flashes %}
+    <div class="alert alert-{{ type }}">  {# Début de la boucle : Parcours des différents types de messages flash #}
+        {{ messages | join('. ') }}  {# Affichage des messages flash pour chaque type #}
+    </div>
+{% endfor %}

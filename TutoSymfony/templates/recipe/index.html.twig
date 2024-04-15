@@ -1,16 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}  {# Étend le template de base #}
 
-{% block title %}Toutes les recettes !{% endblock %}
+{% block title %}Toutes les recettes !{% endblock %}  {# Définit le titre de la page #}
 
-{% block body %}
+{% block body %}  {# Début du contenu de la page #}
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum commodi fuga quas voluptatibus reiciendis id velit doloribus quaerat, eos odio ad nihil sapiente corporis, illo placeat ducimus non ea esse?
     </p>
-    <ul>
-        {% for recipe in recipes %}
-        <li>
-            <a href="{{ path('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title }}</a>
-        </li>
+    <p>
+        <a class="btn btn-primary btn-sm" href="{{ path('recipe.create') }}">Créer une recette</a>  {# Bouton pour créer une nouvelle recette #}
+    </p>
+    <table class="table">  {# Début du tableau pour afficher les recettes #}
+        <thead>
+        <tr>
+            <th>Titre</th>  {# En-tête du tableau #}
+            <th>Actions</th>  {# En-tête du tableau #}
+        </tr>
+        </thead>
+        <tbody>
+        {% for recipe in recipes %}  {# Boucle pour parcourir toutes les recettes #}
+            <tr>
+                <td>
+                    <a href="{{ path('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{ recipe.title }}</a>  {# Affichage du titre de la recette avec un lien vers sa page détaillée #}
+                </td>
+                <td>
+                    <div class="d-flex gap-1">
+                        <a class="btn btn-primary btn-sm" href="{{ path('recipe.edit', {id: recipe.id}) }}">Editer</a>  {# Bouton pour éditer la recette #}
+                        <form action="{{ path('recipe.delete', {id: recipe.id}) }}" method="post">  {# Formulaire pour supprimer la recette #}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>  {# Bouton pour soumettre le formulaire de suppression #}
+                        </form>
+                    </div>
+                </td>
+            </tr>
         {% endfor %}
-    </ul> 
-{% endblock %}
+        </tbody>
+    </table>  {# Fin du tableau #}
+{% endblock %}  {# Fin du contenu de la page #}

@@ -1,14 +1,16 @@
-# see https://symfony.com/doc/current/reference/configuration/framework.html
+# Configuration principale de Symfony
 framework:
-    secret: '%env(APP_SECRET)%'
+    secret: '%env(APP_SECRET)%'  # Clé secrète utilisée pour le chiffrement
     #csrf_protection: true
 
-    # Note that the session will be started ONLY if you read or write from it.
+    # La session sera démarrée UNIQUEMENT si elle est lue ou écrite.
     session: true
 
     #esi: true
     #fragments: true
+    http_method_override: true  # Activation de la substitution de méthode HTTP
 
+# Configuration spécifique pour les tests
 when@test:
     framework:
         test: true
