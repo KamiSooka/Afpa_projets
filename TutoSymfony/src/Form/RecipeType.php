@@ -8,11 +8,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+// use Symfony\Component\Validator\Constraints\Length;
+// use Symfony\Component\Validator\Constraints\Regex;
+// use Symfony\Component\Validator\Constraints\Sequentially;
 
 class RecipeType extends AbstractType
 {
@@ -20,11 +24,15 @@ class RecipeType extends AbstractType
     {
         // Ajout des champs de formulaire pour le titre, le slug, le contenu et la durée
         $builder
-            ->add('title')
+            ->add('title', TextType::class, [
+                'empty_data' => '',
+            ])
             ->add('slug',TextType::class, [
-                'required' => false
-            ] ) 
-            ->add('content')
+                'required' => false,
+            ]) 
+            ->add('content', TextareaType::class, [
+                'empty_data' => '',
+            ])
             ->add('duration')
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
